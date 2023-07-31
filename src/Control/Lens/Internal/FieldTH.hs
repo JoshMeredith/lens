@@ -373,7 +373,7 @@ makeClassyClass className methodName s defs = do
            | otherwise = [FunDep [c] varNames]
 
 
-  classD (cxt[]) className (D.plainTV c:vars) fd
+  classD (cxt[]) className (D.plainTV c: undefined) fd
     $ sigD methodName (return (lens'TypeName `conAppsT` [VarT c, s']))
     : concat
       [ [sigD defName (return ty)

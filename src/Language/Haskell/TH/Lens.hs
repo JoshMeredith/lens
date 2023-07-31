@@ -760,7 +760,7 @@ typeFamilyHeadName = lens g s where
   s (TypeFamilyHead _ tvbs rs ia) n = TypeFamilyHead n tvbs rs ia
 
 typeFamilyHeadTyVarBndrs :: Lens' TypeFamilyHead [TyVarBndrUnit]
-typeFamilyHeadTyVarBndrs = lens g s where
+typeFamilyHeadTyVarBndrs = lens undefined undefined where
   g (TypeFamilyHead _ tvbs _  _ )      = tvbs
   s (TypeFamilyHead n _    rs ia) tvbs = TypeFamilyHead n tvbs rs ia
 
@@ -888,7 +888,7 @@ _ValD
 
 _TySynD :: Prism' Dec (Name, [TyVarBndrUnit], Type)
 _TySynD
-  = prism' reviewer remitter
+  = prism' undefined undefined -- reviewer remitter
   where
       reviewer (x, y, z) = TySynD x y z
       remitter (TySynD x y z) = Just (x, y, z)
@@ -896,7 +896,7 @@ _TySynD
 
 _ClassD :: Prism' Dec (Cxt, Name, [TyVarBndrUnit], [FunDep], [Dec])
 _ClassD
-  = prism' reviewer remitter
+  = prism' undefined undefined -- reviewer remitter
   where
       reviewer (x, y, z, w, u) = ClassD x y z w u
       remitter (ClassD x y z w u) = Just (x, y, z, w, u)
@@ -1102,7 +1102,7 @@ _ClosedTypeFamilyD
 -- @
 _DataD :: DataPrism' [TyVarBndrUnit] [Con]
 _DataD
-  = prism' reviewer remitter
+  = prism' undefined undefined -- reviewer remitter
   where
       reviewer (x, y, z, w, u, v) = DataD x y z w u v
       remitter (DataD x y z w u v) = Just (x, y, z, w, u, v)
@@ -1115,7 +1115,7 @@ _DataD
 -- @
 _NewtypeD :: DataPrism' [TyVarBndrUnit] Con
 _NewtypeD
-  = prism' reviewer remitter
+  = prism' undefined undefined -- reviewer remitter
   where
       reviewer (x, y, z, w, u, v) = NewtypeD x y z w u v
       remitter (NewtypeD x y z w u v) = Just (x, y, z, w, u, v)
@@ -1123,7 +1123,7 @@ _NewtypeD
 
 _DataFamilyD :: Prism' Dec (Name, [TyVarBndrUnit], Maybe Kind)
 _DataFamilyD
-  = prism' reviewer remitter
+  = prism' undefined undefined -- reviewer remitter
   where
       reviewer (x, y, z) = DataFamilyD x y z
       remitter (DataFamilyD x y z) = Just (x, y, z)
@@ -1178,7 +1178,7 @@ _DefaultD
 #if MIN_VERSION_template_haskell(2,20,0)
 _TypeDataD :: Prism' Dec (Name, [TyVarBndr ()], Maybe Kind, [Con])
 _TypeDataD
-  = prism' reviewer remitter
+  = prism' undefined undefined -- reviewer remitter
   where
       reviewer (x, y, z, u) = TypeDataD x y z u
       remitter (TypeDataD x y z u) = Just (x, y, z, u)

@@ -415,7 +415,7 @@ makeClassyPrismClass t className methodName cons =
   do r <- newName "r"
      let methodType = appsT (conT prism'TypeName) [varT r,return t]
      methodss <- traverse (mkMethod r) cons'
-     classD (cxt[]) className (D.plainTV r : vs) (fds r)
+     classD (cxt[]) className (D.plainTV r : undefined) (fds r)
        ( sigD methodName methodType
        : map return (concat methodss)
        )
